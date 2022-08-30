@@ -1,0 +1,9 @@
+{% extends '/wpadmin_pages/insights/base.twig' %}
+
+{% block page_main %}
+	<div class="row">
+		<div class="col insights_section" id="TabDashboardMeters">
+			{{ content.progress_meters|raw }}
+		</div>
+	</div>
+{% endblock %}

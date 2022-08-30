@@ -1,0 +1,730 @@
+{
+  "properties":    {
+    "slug":                  "plugin",
+    "load_priority":         0,
+    "name":                  "General Settings",
+    "sidebar_name":          "General",
+    "menu_title":            "Configuration",
+    "show_module_menu_item": true,
+    "show_module_options":   true,
+    "storage_key":           "plugin",
+    "tagline":               "General Plugin Settings",
+    "auto_enabled":          true,
+    "show_central":          true,
+    "access_restricted":     true,
+    "premium":               false,
+    "run_if_whitelisted":    true,
+    "run_if_verified_bot":   true,
+    "run_if_wpcli":          true,
+    "order":                 10
+  },
+  "menus":         {
+    "config_menu_priority": 10
+  },
+  "wpcli":         {
+    "enabled": true
+  },
+  "admin_notices": {
+    "databases-not-ready":        {
+      "id":               "databases-not-ready",
+      "schedule":         "conditions",
+      "valid_admin":      true,
+      "plugin_page_only": false,
+      "can_dismiss":      false,
+      "type":             "error"
+    },
+    "plugin-too-old":             {
+      "id":               "plugin-too-old",
+      "schedule":         "conditions",
+      "valid_admin":      true,
+      "plugin_page_only": false,
+      "can_dismiss":      true,
+      "type":             "error"
+    },
+    "rules-not-running":          {
+      "id":               "rules-not-running",
+      "schedule":         "conditions",
+      "valid_admin":      false,
+      "plugin_page_only": true,
+      "can_dismiss":      false,
+      "type":             "error"
+    },
+    "override-forceoff":          {
+      "id":               "override-forceoff",
+      "schedule":         "conditions",
+      "valid_admin":      false,
+      "plugin_page_only": false,
+      "can_dismiss":      false,
+      "type":             "error"
+    },
+    "plugin-disabled":            {
+      "id":               "plugin-disabled",
+      "schedule":         "conditions",
+      "valid_admin":      true,
+      "plugin_page_only": true,
+      "can_dismiss":      false,
+      "type":             "error"
+    },
+    "update-available":           {
+      "id":               "update-available",
+      "schedule":         "conditions",
+      "valid_admin":      true,
+      "plugin_page_only": true,
+      "can_dismiss":      false,
+      "type":             "error"
+    },
+    "compat-sgoptimize":          {
+      "id":               "compat-sgoptimize",
+      "schedule":         "conditions",
+      "valid_admin":      true,
+      "plugin_admin":     "ignore",
+      "plugin_page_only": false,
+      "can_dismiss":      false,
+      "type":             "warning"
+    },
+    "wizard_welcome":             {
+      "id":       "wizard_welcome",
+      "per_user": false,
+      "type":     "info"
+    },
+    "plugin-mailing-list-signup": {
+      "id":               "plugin-mailing-list-signup",
+      "min_install_days": 5,
+      "type":             "promo",
+      "drip_form_id":     "250437573"
+    },
+    "allow-tracking":             {
+      "id":               "allow-tracking",
+      "plugin_admin":     true,
+      "min_install_days": 3,
+      "type":             "promo"
+    },
+    "rate-plugin":                {
+      "id":               "rate-plugin",
+      "min_install_days": 30,
+      "type":             "promo"
+    }
+  },
+  "sections":      [
+    {
+      "slug":        "section_defaults",
+      "primary":     true,
+      "title":       "Plugin Defaults",
+      "title_short": "Plugin Defaults",
+      "beacon_id":   389
+    },
+    {
+      "slug":        "section_general_plugin_options",
+      "title":       "General Plugin Options",
+      "title_short": "General Options"
+    },
+    {
+      "slug":        "section_third_party_captcha",
+      "title":       "CAPTCHA",
+      "title_short": "CAPTCHA",
+      "beacon_id":   390
+    },
+    {
+      "slug":        "section_importexport",
+      "title":       "Import / Export",
+      "title_short": "Import / Export",
+      "beacon_id":   129
+    },
+    {
+      "slug":        "section_global_security_options",
+      "title":       "Global Plugin Security Options",
+      "title_short": "Disable Shield"
+    },
+    {
+      "slug":   "section_non_ui",
+      "hidden": true
+    }
+  ],
+  "options":       [
+    {
+      "key":         "global_enable_plugin_features",
+      "section":     "section_global_security_options",
+      "default":     "Y",
+      "type":        "checkbox",
+      "link_info":   "",
+      "link_blog":   "",
+      "beacon_id":   389,
+      "name":        "Enable/Disable All Plugin Modules",
+      "summary":     "Global Plugin On/Off Switch",
+      "description": "Uncheck this option to disable all Shield features"
+    },
+    {
+      "key":         "enable_tracking",
+      "section":     "section_general_plugin_options",
+      "default":     "N",
+      "type":        "checkbox",
+      "link_info":   "https://shsec.io/7i",
+      "link_blog":   "",
+      "name":        "Enable Information Gathering",
+      "summary":     "Permit Anonymous Usage Information Gathering",
+      "description": "Allows us to gather information on statistics and features in-use across our client installations. This information is strictly anonymous and contains no personally, or otherwise, identifiable data."
+    },
+    {
+      "key":         "enable_shieldnet",
+      "section":     "section_general_plugin_options",
+      "premium":     true,
+      "default":     "Y",
+      "type":        "checkbox",
+      "beacon_id":   437,
+      "link_info":   "https://shsec.io/kb",
+      "link_blog":   "https://shsec.io/kc",
+      "name":        "Enable ShieldNET",
+      "summary":     "Enhanced Website Security Through Network Intelligence",
+      "description": "Enhanced Website Security Through Network Intelligence."
+    },
+    {
+      "key":         "show_advanced",
+      "section":     "section_non_ui",
+      "default":     "Y",
+      "type":        "checkbox",
+      "link_info":   "",
+      "link_blog":   "",
+      "name":        "Show All Options",
+      "summary":     "Show All Options Including Those Marked As Advanced",
+      "description": "Shield hides advanced options from view to simplify display. Turn this option on to display advanced options at all times."
+    },
+    {
+      "key":           "visitor_address_source",
+      "section":       "section_defaults",
+      "advanced":      true,
+      "sensitive":     false,
+      "type":          "select",
+      "default":       "AUTO_DETECT_IP",
+      "value_options": [
+        {
+          "value_key": "AUTO_DETECT_IP",
+          "text":      "Automatically Detect Visitor IP"
+        },
+        {
+          "value_key": "REMOTE_ADDR",
+          "text":      "REMOTE_ADDR"
+        },
+        {
+          "value_key": "HTTP_CF_CONNECTING_IP",
+          "text":      "HTTP_CF_CONNECTING_IP"
+        },
+        {
+          "value_key": "HTTP_X_FORWARDED_FOR",
+          "text":      "HTTP_X_FORWARDED_FOR"
+        },
+        {
+          "value_key": "HTTP_X_FORWARDED",
+          "text":      "HTTP_X_FORWARDED"
+        },
+        {
+          "value_key": "HTTP_X_REAL_IP",
+          "text":      "HTTP_X_REAL_IP"
+        },
+        {
+          "value_key": "HTTP_X_SUCURI_CLIENTIP",
+          "text":      "HTTP_X_SUCURI_CLIENTIP"
+        },
+        {
+          "value_key": "HTTP_INCAP_CLIENT_IP",
+          "text":      "HTTP_INCAP_CLIENT_IP"
+        },
+        {
+          "value_key": "HTTP_X_SP_FORWARDED_IP",
+          "text":      "HTTP_X_SP_FORWARDED_IP"
+        },
+        {
+          "value_key": "HTTP_FORWARDED",
+          "text":      "HTTP_FORWARDED"
+        },
+        {
+          "value_key": "HTTP_CLIENT_IP",
+          "text":      "HTTP_CLIENT_IP"
+        }
+      ],
+      "link_info":     "https://shsec.io/dn",
+      "link_blog":     "",
+      "beacon_id":     391,
+      "name":          "Visitor IP Address",
+      "summary":       "Which Address Is Yours",
+      "description":   "There are many way to detect visitor IP addresses. Please select yours from the list."
+    },
+    {
+      "key":         "block_send_email_address",
+      "section":     "section_defaults",
+      "sensitive":   true,
+      "default":     "",
+      "type":        "email",
+      "link_info":   "",
+      "link_blog":   "",
+      "name":        "Report Email",
+      "summary":     "Where to send email reports",
+      "description": "If this is empty, it will default to the blog admin email address."
+    },
+    {
+      "key":         "enable_upgrade_admin_notice",
+      "section":     "section_general_plugin_options",
+      "default":     "Y",
+      "type":        "checkbox",
+      "link_info":   "",
+      "link_blog":   "",
+      "name":        "In-Plugin Notices",
+      "summary":     "Display Plugin Specific Notices",
+      "description": "Disable this option to hide certain plugin admin notices about available updates and post-update notices."
+    },
+    {
+      "key":         "enable_wpcli",
+      "section":     "section_general_plugin_options",
+      "advanced":    true,
+      "premium":     true,
+      "default":     "Y",
+      "type":        "checkbox",
+      "link_info":   "https://shsec.io/i1",
+      "link_blog":   "https://shsec.io/i2",
+      "beacon_id":   308,
+      "name":        "Allow WP-CLI",
+      "summary":     "Allow Access And Control Of This Plugin Via WP-CLI",
+      "description": "Turn off this option to disable this plugin's WP-CLI integration."
+    },
+    {
+      "key":         "display_plugin_badge",
+      "section":     "section_general_plugin_options",
+      "default":     "N",
+      "type":        "checkbox",
+      "link_info":   "https://shsec.io/5v",
+      "link_blog":   "https://shsec.io/wpsf20",
+      "beacon_id":   130,
+      "name":        "Show Plugin Badge",
+      "summary":     "Display Plugin Security Badge On Your Site",
+      "description": "Enabling this option helps support the plugin by spreading the word about it on your website. The plugin badge also demonstrates to visitors that you take your website security seriously."
+    },
+    {
+      "key":         "importexport_enable",
+      "section":     "section_importexport",
+      "advanced":    true,
+      "premium":     true,
+      "default":     "Y",
+      "type":        "checkbox",
+      "link_info":   "https://shsec.io/do",
+      "link_blog":   "https://shsec.io/dp",
+      "beacon_id":   129,
+      "name":        "Allow Import/Export",
+      "summary":     "Allow Import Of Options To, And Export Of Options From, This Site",
+      "description": "Uncheck this box to completely disable import and export of options."
+    },
+    {
+      "key":         "importexport_masterurl",
+      "section":     "section_importexport",
+      "advanced":    true,
+      "default":     "",
+      "type":        "text",
+      "link_info":   "",
+      "link_blog":   "",
+      "name":        "Auto-Import URL",
+      "summary":     "Automatically Import Options From This Site",
+      "description": "Supplying a valid site URL here will make this site an 'Options Slave' and will automatically import options daily."
+    },
+    {
+      "key":          "importexport_whitelist",
+      "section":      "section_importexport",
+      "advanced":     true,
+      "transferable": false,
+      "sensitive":    true,
+      "default":      [],
+      "type":         "array",
+      "link_info":    "",
+      "link_blog":    "",
+      "name":         "Export Whitelist",
+      "summary":      "Whitelisted Sites Which Do Not Need The Secret Key To Export Options",
+      "description":  "Each site on this list will be able to export options from this site without providing the secret key. Take a new line for each URL."
+    },
+    {
+      "key":         "importexport_whitelist_notify",
+      "section":     "section_importexport",
+      "advanced":    true,
+      "sensitive":   true,
+      "default":     "N",
+      "type":        "checkbox",
+      "link_info":   "",
+      "link_blog":   "",
+      "name":        "Notify Whitelist",
+      "summary":     "Notify Sites On The Whitelist To Update Options From Master",
+      "description": "When enabled, manual options saving will notify sites on the whitelist to export options from the Master site."
+    },
+    {
+      "key":          "importexport_secretkey",
+      "section":      "section_importexport",
+      "advanced":     true,
+      "transferable": false,
+      "sensitive":    true,
+      "default":      "",
+      "type":         "noneditable_text",
+      "link_info":    "",
+      "link_blog":    "",
+      "name":         "Secret Key",
+      "summary":      "Import/Export Secret Key",
+      "description":  "Keep this Secret Key private as it will allow the import and export of options."
+    },
+    {
+      "key":         "delete_on_deactivate",
+      "section":     "section_general_plugin_options",
+      "default":     "N",
+      "type":        "checkbox",
+      "link_info":   "",
+      "link_blog":   "",
+      "name":        "Delete Plugin Settings",
+      "summary":     "Delete All Plugin Settings Upon Plugin Deactivation",
+      "description": "Careful: Removes all plugin options when you deactivate the plugin."
+    },
+    {
+      "key":         "locale_override",
+      "section":     "section_general_plugin_options",
+      "advanced":    true,
+      "default":     "",
+      "type":        "text",
+      "link_info":   "https://icwp.io/il",
+      "link_blog":   "",
+      "name":        "Locale Override",
+      "summary":     "Delete All Plugin Settings Upon Plugin Deactivation",
+      "description": "Careful: Removes all plugin options when you deactivate the plugin."
+    },
+    {
+      "key":           "captcha_provider",
+      "section":       "section_third_party_captcha",
+      "default":       "grecaptcha",
+      "type":          "select",
+      "value_options": [
+        {
+          "value_key": "grecaptcha",
+          "text":      "Google reCAPTCHA v2"
+        },
+        {
+          "value_key": "hcaptcha",
+          "text":      "hCaptcha"
+        }
+      ],
+      "link_info":     "https://shsec.io/dq",
+      "link_blog":     "",
+      "beacon_id":     390,
+      "name":          "CAPTCHA Provider",
+      "summary":       "Which CAPTCHA Provider To Use Throughout",
+      "description":   "You can choose the CAPTCHA provider depending on your preferences."
+    },
+    {
+      "key":           "google_recaptcha_style",
+      "section":       "section_third_party_captcha",
+      "premium":       true,
+      "default":       "light",
+      "type":          "select",
+      "value_options": [
+        {
+          "value_key": "light",
+          "text":      "Light Theme"
+        },
+        {
+          "value_key": "dark",
+          "text":      "Dark Theme"
+        },
+        {
+          "value_key": "invisible",
+          "text":      "Invisible"
+        }
+      ],
+      "link_info":     "https://shsec.io/dq",
+      "link_blog":     "",
+      "beacon_id":     269,
+      "name":          "CAPTCHA Type",
+      "summary":       "How Google reCAPTCHA Will Be Displayed By Default",
+      "description":   "You can choose the reCAPTCHA display format that best suits your site, including the new Invisible Recaptcha."
+    },
+    {
+      "key":         "google_recaptcha_site_key",
+      "section":     "section_third_party_captcha",
+      "sensitive":   true,
+      "default":     "",
+      "type":        "text",
+      "link_info":   "https://shsec.io/shld5",
+      "link_blog":   "",
+      "beacon_id":   390,
+      "name":        "reCAPTCHA Site Key",
+      "summary":     "Google reCAPTCHA Site Key - Only v2 or Invisible. v3 NOT supported.",
+      "description": "Enter your Google reCAPTCHA site key for use throughout the plugin."
+    },
+    {
+      "key":         "google_recaptcha_secret_key",
+      "section":     "section_third_party_captcha",
+      "sensitive":   true,
+      "default":     "",
+      "type":        "text",
+      "link_info":   "https://shsec.io/shld5",
+      "link_blog":   "",
+      "beacon_id":   390,
+      "name":        "reCAPTCHA Secret",
+      "summary":     "Google reCAPTCHA Secret Key - Only v2 or Invisible. v3 NOT supported.",
+      "description": "Enter your Google reCAPTCHA secret key for use throughout the plugin."
+    },
+    {
+      "key":          "tracking_last_sent_at",
+      "section":      "section_non_ui",
+      "transferable": false,
+      "type":         "integer",
+      "default":      0,
+      "min":          0
+    },
+    {
+      "key":          "unique_installation_id",
+      "section":      "section_non_ui",
+      "transferable": false,
+      "type":         "text",
+      "default":      0
+    },
+    {
+      "key":     "tracking_permission_set_at",
+      "section": "section_non_ui",
+      "type":    "integer",
+      "default": 0
+    },
+    {
+      "key":          "installation_time",
+      "section":      "section_non_ui",
+      "transferable": false,
+      "type":         "integer",
+      "default":      0
+    },
+    {
+      "key":          "activated_at",
+      "transferable": false,
+      "section":      "section_non_ui",
+      "type":         "integer",
+      "default":      0
+    },
+    {
+      "key":          "importexport_secretkey_expires_at",
+      "section":      "section_non_ui",
+      "transferable": false,
+      "type":         "integer",
+      "default":      0
+    },
+    {
+      "key":          "importexport_handshake_expires_at",
+      "section":      "section_non_ui",
+      "transferable": false,
+      "type":         "integer",
+      "default":      0
+    },
+    {
+      "key":          "openssl_private_key",
+      "transferable": false,
+      "sensitive":    true,
+      "section":      "section_non_ui",
+      "type":         "text",
+      "default":      ""
+    },
+    {
+      "key":          "snapi_data",
+      "transferable": false,
+      "sensitive":    true,
+      "section":      "section_non_ui",
+      "type":         "array",
+      "default":      []
+    },
+    {
+      "key":          "captcha_checked_at",
+      "transferable": false,
+      "section":      "section_non_ui",
+      "type":         "int",
+      "default":      -1
+    },
+    {
+      "key":          "cache_dir_write_test",
+      "transferable": false,
+      "section":      "section_non_ui",
+      "type":         "array",
+      "default":      []
+    },
+    {
+      "key":          "last_known_cache_basedirs",
+      "transferable": false,
+      "section":      "section_non_ui",
+      "type":         "array",
+      "default":      []
+    },
+    {
+      "key":          "ipdetect_at",
+      "transferable": false,
+      "section":      "section_non_ui",
+      "type":         "integer",
+      "default":      0
+    }
+  ],
+  "definitions":   {
+    "rest_api":            {
+      "publish":    true,
+      "pro_only":   true,
+      "route_defs": {
+        "debug_get":   {
+        },
+        "option_get":  {
+        },
+        "option_set":  {
+        },
+        "options_get": {
+        },
+        "options_set": {
+        }
+      }
+    },
+    "href_privacy_policy": "https://shsec.io/wpshieldprivacypolicy",
+    "db_classes":          {
+      "notes": "\\FernleafSystems\\Wordpress\\Plugin\\Shield\\Databases\\AdminNotes\\Handler"
+    },
+    "db_table_notes":      {
+      "slug":           "notes",
+      "has_updated_at": true,
+      "cols_custom":    {
+        "wp_username": "varchar(255) NOT NULL DEFAULT 'unknown'",
+        "note":        "TEXT"
+      }
+    },
+    "events":              {
+      "debug_log":              {
+        "audit_params": [
+          "message"
+        ],
+        "level":        "debug",
+        "stat":         false
+      },
+      "test_cron_run":          {
+        "level":  "debug",
+        "recent": true
+      },
+      "import_notify_sent":     {
+        "level": "debug",
+        "stat":  false
+      },
+      "import_notify_received": {
+        "audit_params": [
+          "master_site"
+        ],
+        "level":        "notice",
+        "stat":         false
+      },
+      "options_exported":       {
+        "audit_params": [
+          "site"
+        ],
+        "level":        "notice",
+        "stat":         true,
+        "recent":       true
+      },
+      "options_imported":       {
+        "audit_params": [
+          "site"
+        ],
+        "level":        "notice",
+        "stat":         true,
+        "recent":       true
+      },
+      "whitelist_site_added":   {
+        "audit_params": [
+          "site"
+        ],
+        "level":        "warning",
+        "stat":         false
+      },
+      "whitelist_site_removed": {
+        "audit_params": [
+          "site"
+        ],
+        "level":        "notice",
+        "stat":         false
+      },
+      "master_url_set":         {
+        "audit_params": [
+          "site"
+        ],
+        "level":        "warning",
+        "stat":         false
+      },
+      "recaptcha_success":      {
+        "level": "debug"
+      },
+      "recaptcha_fail":         {
+        "level": "warning",
+        "audit": true
+      },
+      "antibot_pass":           {
+        "audit_params": [
+          "score",
+          "minimum"
+        ],
+        "level":        "info",
+        "stat":         true
+      },
+      "antibot_fail":           {
+        "audit_params": [
+          "score",
+          "minimum"
+        ],
+        "level":        "warning",
+        "stat":         true
+      },
+      "frontpage_load":         {
+        "level":   "debug",
+        "offense": false,
+        "stat":    false
+      },
+      "loginpage_load":         {
+        "level":   "debug",
+        "offense": false,
+        "stat":    false
+      }
+    },
+    "wizards":             {
+      "welcome": {
+        "title":                "Getting Started Setup Wizard",
+        "desc":                 "An introduction to this security plugin, helping you get setup and started quickly with the core features.",
+        "min_user_permissions": "manage_options",
+        "steps":                {
+          "welcome":                  {
+            "security_admin": false,
+            "title":          "Welcome"
+          },
+          "ip_detect":                {
+            "title": "IP Detection"
+          },
+          "admin_access_restriction": {
+            "title": "Security Admin"
+          },
+          "audit_trail":              {
+            "title": "Activity Log"
+          },
+          "ips":                      {
+            "title": "IP Blacklist"
+          },
+          "login_protect":            {
+            "title": "Login Protection"
+          },
+          "comments_filter":          {
+            "title": "Comment SPAM"
+          },
+          "plugin_badge":             {
+            "title": "Security Badge"
+          },
+          "plugin_telemetry":         {
+            "title": "Plugin Telemetry"
+          },
+          "free_trial":               {
+            "title": "Free Trial"
+          },
+          "optin":                    {
+            "title": "Join Us!"
+          },
+          "thankyou":                 {
+            "security_admin": false,
+            "title":          "Thank You!"
+          }
+        }
+      }
+    }
+  }
+}

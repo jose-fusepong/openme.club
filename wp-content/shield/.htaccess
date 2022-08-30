@@ -1,0 +1,8 @@
+# BEGIN SHIELD
+Options -Indexes
+Order allow,deny
+Deny from all
+<FilesMatch "^.*\.(css|js)$">
+ Allow from all
+</FilesMatch>
+# END SHIELD

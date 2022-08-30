@@ -1,0 +1,644 @@
+{
+  "slug":             "hack_protect",
+  "properties":       {
+    "slug":                  "hack_protect",
+    "load_priority":         100,
+    "menu_priority":         20,
+    "name":                  "Hack Guard",
+    "namespace":             "HackGuard",
+    "sidebar_name":          "Scanners",
+    "show_module_menu_item": false,
+    "show_module_options":   true,
+    "storage_key":           "hack_protect",
+    "tagline":               "Automatically detect and repair vulnerable and suspicious items",
+    "show_central":          true,
+    "access_restricted":     true,
+    "premium":               false,
+    "order":                 70,
+    "run_if_whitelisted":    true,
+    "run_if_verified_bot":   true,
+    "run_if_wpcli":          true
+  },
+  "reqs":             {
+    "dbs": [
+      "scans",
+      "scanitems",
+      "resultitems",
+      "resultitem_meta",
+      "scanresults"
+    ]
+  },
+  "menus":            {
+    "config_menu_priority": 25
+  },
+  "wpcli":            {
+    "enabled": true,
+    "root":    "hack_guard"
+  },
+  "menu_items":       [
+    {
+      "title": "Scans",
+      "slug":  "scans-redirect"
+    }
+  ],
+  "custom_redirects": [
+    {
+      "source_mod_page": "scans-redirect",
+      "target_mod_page": "insights",
+      "query_args":      {
+        "inav": "scans_results"
+      }
+    }
+  ],
+  "sections":         [
+    {
+      "slug":        "section_file_guard",
+      "primary":     true,
+      "title":       "File Guard",
+      "title_short": "File Guard",
+      "beacon_id":   217,
+      "summary":     [
+        "Purpose - Monitor WordPress files and protect against malicious intrusion and hacking.",
+        "Recommendation - Keep the File Guard features turned on."
+      ]
+    },
+    {
+      "slug":        "section_scan_wpv",
+      "title":       "Vulnerability Scanner",
+      "title_short": "Vulnerability Scanner",
+      "beacon_id":   217,
+      "summary":     [
+        "Purpose - Regularly scan your WordPress plugins and themes for known security vulnerabilities.",
+        "Recommendation - Ensure this is turned on and you will always know if any of your assets have known security vulnerabilities."
+      ]
+    },
+    {
+      "slug":        "section_scan_options",
+      "title":       "Scan Options",
+      "title_short": "Scan Options",
+      "beacon_id":   217,
+      "summary":     [
+        "Purpose - Set how often the Hack Guard scans will run."
+      ]
+    },
+    {
+      "slug":        "section_enable_plugin_feature_hack_protection_tools",
+      "title":       "Enable Module: Hack Guard",
+      "title_short": "Disable Module",
+      "beacon_id":   217,
+      "summary":     [
+        "Purpose - Hack Guard is a set of tools to warn you and protect you against hacks on your site.",
+        "Recommendation - Keep the Hack Guard module turned on."
+      ]
+    },
+    {
+      "slug":   "section_non_ui",
+      "hidden": true
+    }
+  ],
+  "options":          [
+    {
+      "key":         "enable_hack_protect",
+      "section":     "section_enable_plugin_feature_hack_protection_tools",
+      "advanced":    true,
+      "default":     "Y",
+      "type":        "checkbox",
+      "link_info":   "https://shsec.io/wpsf38",
+      "link_blog":   "",
+      "beacon_id":   217,
+      "name":        "Enable Hack Guard",
+      "summary":     "Enable (or Disable) The Hack Guard Module",
+      "description": "Un-Checking this option will completely disable the Hack Guard module"
+    },
+    {
+      "key":         "enable_core_file_integrity_scan",
+      "section":     "section_file_guard",
+      "default":     "Y",
+      "type":        "checkbox",
+      "link_info":   "https://shsec.io/hd",
+      "link_blog":   "https://shsec.io/wpsf37",
+      "beacon_id":   454,
+      "name":        "WP Core File Scanner",
+      "summary":     "Automatically Scans WordPress Core Files For Alterations",
+      "description": "Compares all WordPress core files on your site against the official WordPress files. WordPress Core files should never be altered for any reason."
+    },
+    {
+      "key":           "file_repair_areas",
+      "section":       "section_file_guard",
+      "type":          "multiple_select",
+      "default":       [
+        "wp",
+        "plugin"
+      ],
+      "value_options": [
+        {
+          "value_key": "wp",
+          "text":      "WP Core"
+        },
+        {
+          "value_key": "plugin",
+          "text":      "Plugin Files"
+        },
+        {
+          "value_key": "theme",
+          "text":      "Theme Files"
+        }
+      ],
+      "link_info":     "https://shsec.io/wpsf36",
+      "link_blog":     "https://shsec.io/wpsf37",
+      "beacon_id":     228,
+      "name":          "Auto File Repair",
+      "summary":       "Which Files Should Be Automatically Repaired?",
+      "description":   "When a file is modified, or malware is detected, Shield can try to repair files."
+    },
+    {
+      "key":           "file_locker",
+      "section":       "section_file_guard",
+      "premium":       true,
+      "type":          "multiple_select",
+      "default":       [],
+      "value_options": [
+        {
+          "value_key": "wpconfig",
+          "text":      "WP Config"
+        },
+        {
+          "value_key": "root_htaccess",
+          "text":      "Root .htaccess"
+        },
+        {
+          "value_key": "root_index",
+          "text":      "Root index.php"
+        },
+        {
+          "value_key": "root_webconfig",
+          "text":      "Root Web.Config"
+        }
+      ],
+      "link_info":     "https://shsec.io/h7",
+      "link_blog":     "https://shsec.io/h8",
+      "beacon_id":     226,
+      "name":          "File Locker",
+      "summary":       "Lock Files Against Tampering and Changes",
+      "description":   "As soon as changes are detected to any selected files, the contents may be examined and reverted."
+    },
+    {
+      "key":         "scan_path_exclusions",
+      "section":     "section_file_guard",
+      "advanced":    true,
+      "premium":     true,
+      "default":     [
+        "wp-content/cache/",
+        "wp-content/nfwlog/",
+        "wp-content/wflogs/",
+        "*/error_log",
+        "*/php_error_log",
+        "*/mail.log",
+        "*/php_mail.log",
+        "*/.stylelintrc-css.json",
+        "*/.stylelintrc.json",
+        "*/sucuri-*.php"
+      ],
+      "type":        "array",
+      "link_info":   "",
+      "link_blog":   "",
+      "beacon_id":   441,
+      "name":        "Scan Exclusions",
+      "summary":     "Scan File and Folder Exclusions",
+      "description": "Scan File and Folder Exclusions."
+    },
+    {
+      "key":         "enabled_scan_apc",
+      "section":     "section_scan_wpv",
+      "type":        "checkbox",
+      "default":     "Y",
+      "link_info":   "https://shsec.io/ew",
+      "link_blog":   "https://shsec.io/eo",
+      "beacon_id":   225,
+      "name":        "Abandoned Plugin Scanner",
+      "summary":     "Enable The Abandoned Plugin Scanner",
+      "description": "Scan your WordPress.org assets for whether they've been abandoned."
+    },
+    {
+      "key":         "enable_wpvuln_scan",
+      "section":     "section_scan_wpv",
+      "premium":     true,
+      "type":        "checkbox",
+      "default":     "Y",
+      "link_info":   "https://shsec.io/du",
+      "link_blog":   "https://shsec.io/ah",
+      "beacon_id":   134,
+      "name":        "Vulnerability Scanner",
+      "summary":     "Enable The Vulnerability Scanner",
+      "description": "Scan all your WordPress assets for known security vulnerabilities."
+    },
+    {
+      "key":         "wpvuln_scan_autoupdate",
+      "section":     "section_scan_wpv",
+      "premium":     true,
+      "default":     "N",
+      "type":        "checkbox",
+      "link_info":   "",
+      "link_blog":   "",
+      "name":        "Automatic Updates",
+      "summary":     "Apply Updates Automatically To Vulnerable Plugins",
+      "description": "When an update becomes available, automatically apply updates to items with known vulnerabilities."
+    },
+    {
+      "key":         "optimise_scan_speed",
+      "section":     "section_scan_options",
+      "premium":     false,
+      "type":        "checkbox",
+      "default":     "Y",
+      "link_info":   "",
+      "link_blog":   "",
+      "name":        "Optimise File Scans",
+      "summary":     "Optimise File Scans",
+      "description": "Optimise file scans wherever possible."
+    },
+    {
+      "key":           "scan_frequency",
+      "section":       "section_scan_options",
+      "premium":       true,
+      "default":       "1",
+      "type":          "select",
+      "value_options": [
+        {
+          "value_key": "1",
+          "text":      "Once"
+        },
+        {
+          "value_key": "2",
+          "text":      "Twice (scan every 12hrs)"
+        },
+        {
+          "value_key": "3",
+          "text":      "3 Times (scan every 8hrs)"
+        },
+        {
+          "value_key": "4",
+          "text":      "4 Times (scan every 6hrs)"
+        },
+        {
+          "value_key": "6",
+          "text":      "6 Times (scan every 4hrs)"
+        },
+        {
+          "value_key": "8",
+          "text":      "8 Times (scan every 3hrs)"
+        },
+        {
+          "value_key": "12",
+          "text":      "12 Times (scan every 2hrs)"
+        },
+        {
+          "value_key": "24",
+          "text":      "24 Times (scan every hour)"
+        }
+      ],
+      "link_info":     "https://shsec.io/b2",
+      "link_blog":     "https://shsec.io/kd",
+      "beacon_id":     223,
+      "name":          "Scan Frequency",
+      "summary":       "Number Of Times To Automatically Scan Core Files In 24 Hours",
+      "description":   "Default: Once every 24hrs. To improve security, increase the number of scans per day."
+    },
+    {
+      "key":         "mal_autorepair_surgical",
+      "section":     "section_non_ui",
+      "premium":     true,
+      "type":        "checkbox",
+      "default":     "N",
+      "link_info":   "",
+      "link_blog":   "",
+      "name":        "Surgical Auto-Repair",
+      "summary":     "Automatically Attempt To Surgically Remove Malware Code",
+      "description": "Attempts to automatically remove code from infected files."
+    },
+    {
+      "key":         "ptg_reinstall_links",
+      "section":     "section_scan_options",
+      "premium":     true,
+      "type":        "checkbox",
+      "default":     "Y",
+      "link_info":   "https://shsec.io/bp",
+      "link_blog":   "",
+      "beacon_id":   135,
+      "name":        "Show Re-Install Links",
+      "summary":     "Show Re-Install Links For Plugins",
+      "description": "Show links to re-install plugins and offer re-install when activating plugins."
+    },
+    {
+      "key":              "scans_to_build",
+      "section":          "section_non_ui",
+      "transferable":     false,
+      "tracking_exclude": true,
+      "type":             "array",
+      "default":          []
+    },
+    {
+      "key":              "is_scan_cron",
+      "section":          "section_non_ui",
+      "transferable":     false,
+      "tracking_exclude": true,
+      "type":             "boolean",
+      "default":          false
+    },
+    {
+      "key":              "mal_fp_reports",
+      "section":          "section_non_ui",
+      "transferable":     false,
+      "tracking_exclude": true,
+      "type":             "array",
+      "default":          []
+    },
+    {
+      "key":              "filelocker_state",
+      "section":          "section_non_ui",
+      "transferable":     false,
+      "tracking_exclude": true,
+      "type":             "array",
+      "default":          []
+    },
+    {
+      "key":              "realtime_scan_last_at",
+      "section":          "section_non_ui",
+      "type":             "integer",
+      "default":          0,
+      "transferable":     false,
+      "tracking_exclude": true
+    },
+    {
+      "key":              "legacy_db_conversion_at",
+      "section":          "section_non_ui",
+      "type":             "integer",
+      "default":          0,
+      "transferable":     false,
+      "tracking_exclude": true
+    }
+  ],
+  "definitions":      {
+    "rest_api":                    {
+      "publish":    true,
+      "pro_only":   true,
+      "route_defs": {
+        "scan_status":  {
+        },
+        "scan_start":   {
+        },
+        "scan_results": {
+        }
+      }
+    },
+    "all_scan_slugs":              [
+      "apc",
+      "wpv",
+      "afs"
+    ],
+    "file_scan_extensions":        [
+      "php",
+      "php5",
+      "php7",
+      "js",
+      "json",
+      "css",
+      "htm",
+      "html",
+      "svg",
+      "twig",
+      "hbs"
+    ],
+    "db_handler_classes":          {
+      "scans":           "\\FernleafSystems\\Wordpress\\Plugin\\Shield\\Modules\\HackGuard\\DB\\Scans\\Ops\\Handler",
+      "scanitems":       "\\FernleafSystems\\Wordpress\\Plugin\\Shield\\Modules\\HackGuard\\DB\\ScanItems\\Ops\\Handler",
+      "resultitems":     "\\FernleafSystems\\Wordpress\\Plugin\\Shield\\Modules\\HackGuard\\DB\\ResultItems\\Ops\\Handler",
+      "resultitem_meta": "\\FernleafSystems\\Wordpress\\Plugin\\Shield\\Modules\\HackGuard\\DB\\ResultItemMeta\\Ops\\Handler",
+      "scanresults":     "\\FernleafSystems\\Wordpress\\Plugin\\Shield\\Modules\\HackGuard\\DB\\ScanResults\\Ops\\Handler"
+    },
+    "db_table_scans":              {
+      "autoexpire":     0,
+      "slug":           "scans",
+      "col_older_than": "created_at",
+      "has_updated_at": false,
+      "cols_custom":    {
+        "scan":        {
+          "macro_type": "char",
+          "length":     3,
+          "comment":    "Scan Slug"
+        },
+        "ready_at":    {
+          "macro_type": "timestamp",
+          "comment":    "Scan Ready At"
+        },
+        "finished_at": {
+          "macro_type": "timestamp",
+          "comment":    "Scan Completed At"
+        },
+        "meta":        {
+          "macro_type": "meta",
+          "comment":    "Scan Meta Info"
+        }
+      }
+    },
+    "db_table_scanitems":          {
+      "autoexpire":     0,
+      "slug":           "scanitems",
+      "has_updated_at": false,
+      "has_created_at": false,
+      "has_deleted_at": false,
+      "col_older_than": "started_at",
+      "cols_custom":    {
+        "scan_ref":    {
+          "macro_type":  "foreign_key_id",
+          "foreign_key": {
+            "ref_table": "icwp_wpsf_scans"
+          }
+        },
+        "items":       {
+          "macro_type": "text",
+          "comment":    "Array of scan items"
+        },
+        "started_at":  {
+          "macro_type": "timestamp",
+          "comment":    "Started Scanning Items At"
+        },
+        "finished_at": {
+          "macro_type": "timestamp",
+          "comment":    "Finished Scanning Items At"
+        }
+      }
+    },
+    "db_table_resultitems":        {
+      "autoexpire":     0,
+      "slug":           "resultitems",
+      "has_updated_at": true,
+      "col_older_than": "updated_at",
+      "cols_custom":    {
+        "item_type":         {
+          "macro_type": "char",
+          "length":     1,
+          "comment":    "Result Item Type"
+        },
+        "item_id":           {
+          "macro_type": "varchar",
+          "length":     256,
+          "comment":    "Result Item ID"
+        },
+        "ignored_at":        {
+          "macro_type": "timestamp",
+          "comment":    "Result Ignored"
+        },
+        "notified_at":       {
+          "macro_type": "timestamp",
+          "comment":    "Result Notification Sent"
+        },
+        "auto_filtered_at":  {
+          "macro_type": "timestamp",
+          "comment":    "Result Auto Filtered"
+        },
+        "attempt_repair_at": {
+          "macro_type": "timestamp",
+          "comment":    "Attempted Repair At"
+        },
+        "item_repaired_at":  {
+          "macro_type": "timestamp",
+          "comment":    "Item Repaired At"
+        },
+        "item_deleted_at":   {
+          "macro_type": "timestamp",
+          "comment":    "Item Deleted At"
+        }
+      }
+    },
+    "db_table_resultitem_meta":    {
+      "slug":           "resultitem_meta",
+      "has_updated_at": false,
+      "has_created_at": false,
+      "has_deleted_at": false,
+      "cols_custom":    {
+        "ri_ref":     {
+          "macro_type":  "foreign_key_id",
+          "foreign_key": {
+            "ref_table": "icwp_wpsf_resultitems"
+          },
+          "comment":     "Reference to primary Result Item record"
+        },
+        "meta_key":   {
+          "macro_type": "varchar",
+          "length":     32,
+          "comment":    "Meta Key"
+        },
+        "meta_value": {
+          "macro_type": "text",
+          "comment":    "Meta Data"
+        }
+      }
+    },
+    "db_table_scanresults":        {
+      "autoexpire":     0,
+      "slug":           "scanresults",
+      "has_updated_at": false,
+      "has_created_at": true,
+      "has_deleted_at": false,
+      "cols_custom":    {
+        "scan_ref":       {
+          "macro_type":  "foreign_key_id",
+          "foreign_key": {
+            "ref_table": "icwp_wpsf_scans"
+          }
+        },
+        "resultitem_ref": {
+          "macro_type":  "foreign_key_id",
+          "foreign_key": {
+            "ref_table": "icwp_wpsf_resultitems"
+          }
+        }
+      }
+    },
+    "db_classes":                  {
+      "filelocker": "\\FernleafSystems\\Wordpress\\Plugin\\Shield\\Databases\\FileLocker\\Handler"
+    },
+    "db_table_filelocker":         {
+      "slug":            "filelocker",
+      "has_updated_at":  true,
+      "cols_custom":     {
+        "file":          "varchar(256) NOT NULL COMMENT 'File Path relative to ABSPATH'",
+        "hash_original": "varchar(40) NOT NULL COMMENT 'SHA1 File Hash Original'",
+        "hash_current":  "varchar(40) NOT NULL COMMENT 'SHA1 File Hash Current'",
+        "content":       "MEDIUMBLOB COMMENT 'Content'",
+        "public_key_id": "TINYINT(2) UNSIGNED NOT NULL COMMENT 'Public Key ID'"
+      },
+      "cols_timestamps": {
+        "detected_at": "Change Last Detected",
+        "reverted_at": "Reverted To Backup",
+        "notified_at": "Notification Sent"
+      }
+    },
+    "table_name_filelocker":       "filelocker",
+    "url_mal_sigs_simple":         "https://raw.githubusercontent.com/scr34m/php-malware-scanner/master/definitions/patterns_raw.txt",
+    "url_mal_sigs_regex":          "https://raw.githubusercontent.com/scr34m/php-malware-scanner/master/definitions/patterns_re.txt",
+    "default_whitelist_paths":     [
+      "wp-content/cache/*",
+      "wp-content/shield/*",
+      "wp-content/icwp/rollback/*",
+      "wp-content/plugins-before-restore/*",
+      "wp-content/themes-before-restore/*",
+      "wp-content/uploads/bb-plugin/cache/*",
+      "wp-content/uploads/cache/wpml/twig/*",
+      "wp-content/cache/*",
+      "*/src/lib/src/Rules/rules.json",
+      "*/error_log",
+      "*/php_error_log",
+      "*/mail.log",
+      "*/php_mail.log"
+    ],
+    "wcf_exclusions":              [
+      "readme.html",
+      "license.txt",
+      "licens-sv_SE.txt",
+      "wp-config-sample.php",
+      "wp-content/"
+    ],
+    "wcf_exclusions_missing_only": [
+      "wp-admin/install.php",
+      "xmlrpc.php"
+    ],
+    "events":                      {
+      "scan_run":                 {
+        "audit_params":   [
+          "scan"
+        ],
+        "level":          "debug",
+        "audit_multiple": true
+      },
+      "scan_items_found":         {
+        "audit_params":   [
+          "scan",
+          "items"
+        ],
+        "level":          "alert",
+        "audit_multiple": true,
+        "recent":         true
+      },
+      "scan_item_repair_success": {
+        "audit_params":   [
+          "path_full"
+        ],
+        "audit_multiple": true,
+        "recent":         true
+      },
+      "scan_item_repair_fail":    {
+        "audit_params":   [
+          "path_full"
+        ],
+        "audit_multiple": true
+      },
+      "scan_item_delete_success": {
+        "audit_params":   [
+          "path_full"
+        ],
+        "audit_multiple": true
+      }
+    }
+  }
+}
